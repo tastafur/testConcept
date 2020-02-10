@@ -1,4 +1,4 @@
-import { createStackNavigator,  StackViewTransitionConfigs } from 'react-navigation';
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
 
 // Screens
 import MoviesScreen from '../screens/Movies';
@@ -25,7 +25,6 @@ export const AppNavigator = createStackNavigator(
 
     Search: {
       screen: SearchScreen,
-      transitionConfig: () => StackViewTransitionConfigs.NoAnimation,
       defaultNavigationOptions: {
         gesturesEnabled: false,
       },
@@ -34,6 +33,10 @@ export const AppNavigator = createStackNavigator(
   {
     initialRouteName: 'Movies',
     headerMode: 'screen',
-    transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS
+    defaultNavigationOptions: {
+      gestureEnabled: true,
+      cardOverlayEnabled: true,
+      ...TransitionPresets.SlideFromRightIOS,
+    },
   }
 );
