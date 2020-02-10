@@ -19,6 +19,7 @@ export default class Search extends React.Component {
 
   static navigationOptions = {
     header: null,
+    animationEnabled: false,
   };
 
   state = {
