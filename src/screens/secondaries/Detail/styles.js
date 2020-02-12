@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   card: {
@@ -10,7 +10,7 @@ export default StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'flex-end',
-    flex: 1
+    flex: 1,
   },
   background: {
     ...StyleSheet.absoluteFillObject,
@@ -21,13 +21,13 @@ export default StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.9)',
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'left'
+    textAlign: 'left',
   },
   subtitle: {
     marginTop: 5,
     paddingHorizontal: 30,
     color: 'rgba(0, 0, 0, 0.75)',
     fontSize: 18,
-    textAlign: 'left'
+    textAlign: 'left',
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import {FlatList} from 'react-native';
 import PropTypes from 'prop-types';
 
 import Card from '../../components/Card';
@@ -13,34 +13,38 @@ export default class Search extends React.Component {
     openDetailsEntertainment: PropTypes.func,
     size: PropTypes.string,
     navigation: PropTypes.shape({
-      navigate: PropTypes.func
-    })
-  }
-
-  static navigationOptions = {
-    header: null,
-    animationEnabled: false,
+      navigate: PropTypes.func,
+    }),
   };
 
   state = {
     searchText: null,
   };
 
-  handleQueryChange = searchText => {
-    if(searchText)
-      this.props.fetchSearch(searchText);
+  openDetailsEntertainment = id => {
+    const {navigation} = this.props;
+    navigation.navigate('Detail', {
+      id,
+    });
+  };
 
-    this.setState({ searchText });
+  handleQueryChange = searchText => {
+    if (searchText) {
+      this.props.fetchSearch(searchText);
+    }
+
+    this.setState({searchText});
   };
 
   executeSearch = () => {
-    const { searchText } = this.state;
-    if(searchText)
-      this.props.fetchSearch(searchText)
+    const {searchText} = this.state;
+    if (searchText) {
+      this.props.fetchSearch(searchText);
+    }
   };
 
   render() {
-    const { entertainments, size, openDetailsEntertainment } = this.props
+    const {entertainments, size} = this.props;
 
     return (
       <SearchLayout
@@ -49,9 +53,18 @@ export default class Search extends React.Component {
         {entertainments.length > 0 ? (
           <FlatList
             data={entertainments}
-            renderItem={({ item, index }) => <Card key={index} size={size} onPress={openDetailsEntertainment} data={item} even={(index + 1) % 2 === 0} />}
-            keyExtractor={ (item, index) => index.toString() }
-          />) : null}
+            renderItem={({item, index}) => (
+              <Card
+                key={index}
+                size={size}
+                onPress={this.openDetailsEntertainment}
+                data={item}
+                even={(index + 1) % 2 === 0}
+              />
+            )}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        ) : null}
       </SearchLayout>
     );
   }

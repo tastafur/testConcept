@@ -1,9 +1,9 @@
 import React from 'react';
-import { Animated, Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { HeaderBackButton } from 'react-navigation-stack'
-import { isIphoneX } from 'react-native-iphone-x-helper'
-import PropTypes from "prop-types";
+import {Animated, Platform, StatusBar, StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {HeaderBackButton} from '@react-navigation/stack';
+import {isIphoneX} from 'react-native-iphone-x-helper';
+import PropTypes from 'prop-types';
 
 // @todo: make this work properly when in landscape
 const hasNotch = isIphoneX();
@@ -14,65 +14,8 @@ const TITLE_OFFSET = Platform.OS === 'ios' ? 70 : 56;
 // @todo: this is static and we don't know if it's visible or not on iOS.
 // need to use a more reliable and cross-platform API when one exists, like
 // LayoutContext.
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? (hasNotch ? 40 : 25) : StatusBar.currentHeight;
-
-
-class SearchHeader extends React.PureComponent {
-  static HEIGHT = APPBAR_HEIGHT + STATUSBAR_HEIGHT;
-
-  static propTypes = {
-    backButton: PropTypes.bool,
-    backButtonTitle: PropTypes.string,
-    cancelButtonText: PropTypes.string,
-    tintColor: PropTypes.string,
-    backButtonTruncatedTitle: PropTypes.string,
-    backButtonTitleStyle: PropTypes.object,
-    backgroundColor: PropTypes.string,
-    navigation: PropTypes.shape({
-      goBack: PropTypes.func
-    }),
-    children: PropTypes.object
-  }
-
-  _navigateBack = () => {
-    this.props.navigation.goBack(null);
-  };
-
-  _maybeRenderBackButton = () => {
-    if (!this.props.backButton) {
-      return;
-    }
-
-    return (
-      <HeaderBackButton
-        onPress={this._navigateBack}
-        pressColorAndroid={this.props.tintColor || '#fff'}
-        tintColor={this.props.tintColor}
-        title={this.props.backButtonTitle || null}
-        truncatedTitle={this.props.backButtonTruncatedTitle || null}
-        titleStyle={this.props.backButtonTitleStyle || null}
-      />
-    );
-  };
-
-  render() {
-    let headerStyle = {};
-    if (this.props.backgroundColor) {
-      headerStyle.backgroundColor = this.props.backgroundColor;
-    }
-
-    return (
-      <Animated.View style={[styles.container, headerStyle]}>
-        <View style={styles.appBar}>
-          <View style={[StyleSheet.absoluteFill, styles.header]}>
-            {this._maybeRenderBackButton()}
-            {this.props.children}
-          </View>
-        </View>
-      </Animated.View>
-    );
-  }
-}
+const STATUSBAR_HEIGHT =
+  Platform.OS === 'ios' ? (hasNotch ? 40 : 25) : StatusBar.currentHeight;
 
 let platformContainerStyles;
 if (Platform.OS === 'ios') {
@@ -132,4 +75,59 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(SearchHeader)
+function SearchHeader({children, backButton, tintColor, backButtonTitle, backButtonTruncatedTitle, backButtonTitleStyle, backgroundColor}) {
+  const navigation = useNavigation();
+
+  const _navigateBack = () => {
+    navigation.goBack(null);
+  };
+
+ const _maybeRenderBackButton = () => {
+    if (!backButton) {
+      return;
+    }
+
+    return (
+      <HeaderBackButton
+        onPress={_navigateBack}
+        pressColorAndroid={tintColor || '#fff'}
+        tintColor={tintColor}
+        title={backButtonTitle || null}
+        truncatedTitle={backButtonTruncatedTitle || null}
+        titleStyle={backButtonTitleStyle || null}
+      />
+    );
+  };
+
+  let headerStyle = {};
+  if (backgroundColor) {
+    headerStyle.backgroundColor = backgroundColor;
+  }
+
+  return (
+    <Animated.View style={[styles.container, headerStyle]}>
+      <View style={styles.appBar}>
+        <View style={[StyleSheet.absoluteFill, styles.header]}>
+          {_maybeRenderBackButton()}
+          {children}
+        </View>
+      </View>
+    </Animated.View>
+  );
+}
+
+SearchHeader.propTypes = {
+  backButton: PropTypes.bool,
+  backButtonTitle: PropTypes.string,
+  cancelButtonText: PropTypes.string,
+  tintColor: PropTypes.string,
+  backButtonTruncatedTitle: PropTypes.string,
+  backButtonTitleStyle: PropTypes.object,
+  backgroundColor: PropTypes.string,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
+  children: PropTypes.object,
+};
+
+export default SearchHeader;

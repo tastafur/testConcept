@@ -5,8 +5,8 @@ export function fetchSearch(query) {
   return {
     type: FETCH_SEARCH,
     payload: {
-      query
-    }
+      query,
+    },
   };
 }
 
@@ -14,7 +14,7 @@ export function setSearch(entertainments) {
   return {
     type: SET_SEARCH,
     payload: {
-      entertainments
-    }
+      entertainments,
+    },
   };
 }

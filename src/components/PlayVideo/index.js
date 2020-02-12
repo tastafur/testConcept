@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
-import PlayButton from '../../assets/play-button.png'
+import PlayButton from '../../assets/play-button.png';
 
 import styles from './styles';
 
 import ImageCache from '../../components/ImageCache';
-
 
 export default class Detail extends React.Component {
   static propTypes = {
@@ -19,8 +18,7 @@ export default class Detail extends React.Component {
       <TouchableOpacity
         activeOpacity={0.6}
         style={styles.button}
-        onPress={this.props.onPress}
-      >
+        onPress={this.props.onPress}>
         <ImageCache
           customStyles={styles.image}
           imageApi={false}

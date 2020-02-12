@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 
@@ -11,17 +11,26 @@ export default class ImageCache extends Component {
     baseUrl: PropTypes.string,
     size: PropTypes.any,
     otherUrl: PropTypes.number,
-    imageApi: PropTypes.bool
+    imageApi: PropTypes.bool,
   };
 
-  render () {
-    const { source, customStyles, baseUrl, size, imageApi = true, otherUrl } = this.props;
+  render() {
+    const {
+      source,
+      customStyles,
+      baseUrl,
+      size,
+      imageApi = true,
+      otherUrl,
+    } = this.props;
     const uri = imageApi ? `${baseUrl}${size}${source.path}` : otherUrl;
-    const sourceInternal = imageApi ? {
-      uri,
-      headers: { Authorization: `Bearer ${config.token}` },
-      priority: FastImage.priority.high
-    } : otherUrl;
+    const sourceInternal = imageApi
+      ? {
+          uri,
+          headers: {Authorization: `Bearer ${config.token}`},
+          priority: FastImage.priority.high,
+        }
+      : otherUrl;
     return (
       <FastImage
         style={customStyles}

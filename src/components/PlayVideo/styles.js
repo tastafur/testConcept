@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   button: {
@@ -9,7 +9,7 @@ export default StyleSheet.create({
     backgroundColor: 'blue',
     borderRadius: 100,
     position: 'absolute',
-    top: (-75 / 2),
+    top: -75 / 2,
     right: 30,
     shadowColor: '#000',
     shadowOffset: {
@@ -23,6 +23,6 @@ export default StyleSheet.create({
   image: {
     height: 30,
     width: 30,
-    marginLeft: 6
-  }
+    marginLeft: 6,
+  },
 });

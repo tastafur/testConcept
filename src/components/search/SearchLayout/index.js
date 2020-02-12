@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View } from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import SearchBar from '../SearchBar';
 import SearchHeader from '../SearchHeader';
 
@@ -8,11 +8,11 @@ const DEFAULT_TINT_COLOR = Platform.OS === 'ios' ? '#007AFF' : '#000';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   containerList: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default class SearchLayout extends React.Component {
@@ -28,10 +28,10 @@ export default class SearchLayout extends React.Component {
     onChangeQuery: PropTypes.func,
     onSubmit: PropTypes.func,
     navigation: PropTypes.shape({
-      goBack: PropTypes.func
+      goBack: PropTypes.func,
     }),
-    children: PropTypes.object
-  }
+    children: PropTypes.object,
+  };
 
   static defaultProps = {
     debounce: 500,
@@ -50,7 +50,7 @@ export default class SearchLayout extends React.Component {
   // TODO: debounce
   _handleChangeQuery = q => {
     this.props.onChangeQuery && this.props.onChangeQuery(q);
-    this.setState({ q });
+    this.setState({q});
   };
 
   render() {
@@ -75,11 +75,7 @@ export default class SearchLayout extends React.Component {
             }
           />
         </SearchHeader>
-        <View style={styles.containerList}>
-        {
-          this.props.children
-        }
-        </View>
+        <View style={styles.containerList}>{this.props.children}</View>
       </View>
     );
   }

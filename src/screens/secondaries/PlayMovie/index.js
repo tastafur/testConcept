@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withNavigation } from 'react-navigation';
+import {useNavigation} from '@react-navigation/native';
 import VideoPlayer from '../../../components/VideoPlayer';
 
-const PlayMovie = ({navigation}) => (
-  <VideoPlayer navigation={navigation} />
-);
-
-PlayMovie.propTypes = {
-  navigation: PropTypes.object
+function PlayMovie() {
+  const navigation = useNavigation();
+  return <VideoPlayer navigation={navigation} />;
 }
 
-export default withNavigation(PlayMovie)
+PlayMovie.propTypes = {
+  navigation: PropTypes.object,
+};
+
+export default PlayMovie;

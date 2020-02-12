@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 import ImageCache from '../../ImageCache';
 
@@ -9,7 +9,7 @@ import Search from '../../../assets/search.png';
 
 import styles from './styles';
 
-const SearchButton = ({ navigation }) =>
+const SearchButton = ({navigation}) => (
   <TouchableOpacity
     activeOpacity={1}
     onPress={() => navigation.navigate('Search')}
@@ -19,11 +19,11 @@ const SearchButton = ({ navigation }) =>
       imageApi={false}
       otherUrl={Search}
     />
-  </TouchableOpacity>;
-
+  </TouchableOpacity>
+);
 
 SearchButton.propTypes = {
-  navigation: PropTypes.object
-}
+  navigation: PropTypes.object,
+};
 
 export default SearchButton;

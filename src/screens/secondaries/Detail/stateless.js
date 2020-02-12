@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import {View, Text} from 'react-native';
 
 import styles from './styles';
 
@@ -8,14 +8,12 @@ import ImageCache from '../../../components/ImageCache';
 import PlayVideo from '../../../components/PlayVideo';
 
 // Selectors
-import { getEntertainmentContent, getFieldsMainEntertainment } from '../../../selectors/commons';
-
+import {
+  getEntertainmentContent,
+  getFieldsMainEntertainment,
+} from '../../../selectors/commons';
 
 export default class Detail extends React.Component {
-  static navigationOptions = {
-    title: 'Detail',
-  };
-
   static propTypes = {
     navigation: PropTypes.object,
     size: PropTypes.string,
@@ -23,30 +21,41 @@ export default class Detail extends React.Component {
     movies: PropTypes.object,
     series: PropTypes.object,
     entertainmentSearch: PropTypes.object,
-    openVideo: PropTypes.func
+  };
+
+  openVideo = () => {
+    const {navigation} = this.props;
+    navigation.navigate('PlayMovie');
   };
 
   render() {
-    const { navigation, size, movies, series, entertainmentSearch, openVideo } = this.props;
+    const {navigation, size, movies, series, entertainmentSearch} = this.props;
     const id = navigation.getParam('id', null);
-    if(id) {
-      const { path, title, subtitle } = getFieldsMainEntertainment(getEntertainmentContent({ movies, series, entertainmentSearch }, id));
+    if (id) {
+      const {path, title, subtitle} = getFieldsMainEntertainment(
+        getEntertainmentContent({movies, series, entertainmentSearch}, id),
+      );
 
       return (
         <View style={styles.container}>
           <ImageCache
             customStyles={styles.background}
             size={size}
-            source={{ path }}
+            source={{path}}
           />
           <View style={styles.card}>
-            <PlayVideo onPress={openVideo} />
+            <PlayVideo onPress={this.openVideo} />
             <Text style={styles.title}>{title || ''}</Text>
-            <Text style={styles.subtitle} numberOfLines={4} ellipsizeMode={'tail'}>{subtitle || ''}</Text>
+            <Text
+              style={styles.subtitle}
+              numberOfLines={4}
+              ellipsizeMode={'tail'}>
+              {subtitle || ''}
+            </Text>
           </View>
         </View>
       );
     }
-    return null
+    return null;
   }
 }

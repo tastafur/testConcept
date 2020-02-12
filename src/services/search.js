@@ -4,5 +4,5 @@ export const search = (data = {}) =>
   apiFetch({
     endPoint: encodeURI('/search/multi'),
     method: 'GET',
-    params: data.params
+    params: data.params,
   });
