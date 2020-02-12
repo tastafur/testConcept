@@ -29,8 +29,6 @@ function SearchBar({
   const _textInput = useRef(null);
   const [text, setText] = useState('');
 
-  useEffect(() => requestAnimationFrame(() => _textInput.current.focus()));
-
   const _handleClear = () => {
     setText('');
   };
@@ -43,6 +41,10 @@ function SearchBar({
     onSubmit && onSubmit(text);
     _textInput.current.blur();
   };
+
+  useEffect(() => {
+    requestAnimationFrame(() => _textInput.current.focus());
+  });
 
   let searchInputStyle = {};
   if (textColor) {

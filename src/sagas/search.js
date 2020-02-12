@@ -1,22 +1,22 @@
-import { call, put, debounce } from 'redux-saga/effects';
+import {call, put, debounce} from 'redux-saga/effects';
 
 // Services
-import { search } from '../services/search';
+import {search} from '../services/search';
 
 // Actions
-import { setSearch, FETCH_SEARCH } from '../actions/search';
+import {setSearch, FETCH_SEARCH} from '../actions/search';
 
 // utils errors
-import { errorHandler } from './util/errorHandler'
+import {errorHandler} from './util/errorHandler';
 
 export function* fetchSearchProcess({payload: {query}}) {
   try {
-    const resultSearch = yield call(search, { params: { query } });
-    if(resultSearch) {
-      yield put(setSearch(resultSearch.results))
+    const resultSearch = yield call(search, {params: {query}});
+    if (resultSearch) {
+      yield put(setSearch(resultSearch.results));
     }
   } catch (e) {
-    yield call(errorHandler, e)
+    yield call(errorHandler, e);
   }
 }
 

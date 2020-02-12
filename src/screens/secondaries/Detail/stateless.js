@@ -29,8 +29,8 @@ export default class Detail extends React.Component {
   };
 
   render() {
-    const {navigation, size, movies, series, entertainmentSearch} = this.props;
-    const id = navigation.getParam('id', null);
+    const {route, size, movies, series, entertainmentSearch} = this.props;
+    const id = route.params?.id ?? null;
     if (id) {
       const {path, title, subtitle} = getFieldsMainEntertainment(
         getEntertainmentContent({movies, series, entertainmentSearch}, id),

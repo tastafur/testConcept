@@ -75,14 +75,22 @@ const styles = StyleSheet.create({
   },
 });
 
-function SearchHeader({children, backButton, tintColor, backButtonTitle, backButtonTruncatedTitle, backButtonTitleStyle, backgroundColor}) {
+function SearchHeader({
+  children,
+  backButton,
+  tintColor,
+  backButtonTitle,
+  backButtonTruncatedTitle,
+  backButtonTitleStyle,
+  backgroundColor,
+}) {
   const navigation = useNavigation();
 
   const _navigateBack = () => {
     navigation.goBack(null);
   };
 
- const _maybeRenderBackButton = () => {
+  const _maybeRenderBackButton = () => {
     if (!backButton) {
       return;
     }

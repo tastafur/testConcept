@@ -25,7 +25,7 @@ export function AppNavigator() {
         component={MoviesScreen}
         options={({navigation}) => ({
           title: 'Discover',
-          headerRight: <SearchButton navigation={navigation} />,
+          headerRight: () => <SearchButton navigation={navigation} />,
         })}
       />
       <Stack.Screen
@@ -39,14 +39,14 @@ export function AppNavigator() {
         name="PlayMovie"
         component={PlayMovie}
         options={{
-          header: null,
+          header: () => null,
         }}
       />
       <Stack.Screen
         name="Search"
         component={SearchScreen}
         options={{
-          header: null,
+          header: () => null,
           gestureEnabled: false,
           animationEnabled: false,
         }}

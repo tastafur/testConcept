@@ -85,8 +85,6 @@ function SearchBar({
   const [showCancelButton, setShowCancelButton] = useState(false);
   const [inputWidth, setInputWidth] = useState(SearchContainerWidth);
 
-  useEffect(() => requestAnimationFrame(() => _textInput.current.focus()));
-
   const _handleChangeText = textUpdate => {
     setText(textUpdate);
     onChangeQuery && onChangeQuery(textUpdate);
@@ -130,6 +128,10 @@ function SearchBar({
       setInputWidth(SearchContainerWidth - cancelButtonWidth);
     });
   };
+
+  useEffect(() => {
+    requestAnimationFrame(() => _textInput.current.focus());
+  });
 
   let searchInputStyle = {};
   if (textColor) {
